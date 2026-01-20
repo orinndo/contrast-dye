@@ -1,161 +1,113 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>造影剤（Contrast Dye）音声ガイド</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>造影剤の説明・チューブ接続（Contrast Dye & IV Tube）音声ガイド</title>
 <style>
-  :root{
-    --border:#d9d9de;
-    --bg:#ffffff;
-    --muted:#6b6b73;
-    --btn:#f7f7f9;
-    --btnBorder:#cfcfd6;
-    --accent:#0a84ff;
-  }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Segoe UI", sans-serif; margin: 18px; line-height: 1.6; color:#111; background:#fff; }
-  h1 { margin: 0 0 6px; font-size: 22px; }
-  .sub { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
-  .panel { border: 1px solid var(--border); border-radius: 12px; padding: 14px; background: var(--bg); }
-  .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
-  .badge { display:inline-block; padding:6px 10px; border:1px solid var(--border); border-radius:999px; font-size:13px; color:#333; background:#fafafa; }
-  select { width:100%; padding: 10px 12px; border:1px solid var(--border); border-radius: 10px; font-size: 15px; background:#fff; }
-  .navbtn { padding:10px 14px; border:1px solid var(--btnBorder); border-radius: 10px; background: var(--btn); font-size: 15px; cursor:pointer; }
-  .navbtn:active { transform: translateY(1px); }
-  .sectionTitle { margin: 14px 0 6px; color: var(--muted); font-size: 13px; }
-  .jp { font-size: 18px; font-weight: 700; margin: 0 0 6px; }
-  .en { font-size: 18px; margin: 0 0 10px; }
-  .btn { padding: 10px 14px; border: 1px solid var(--btnBorder); border-radius: 10px; background: var(--btn); font-size: 15px; cursor: pointer; }
-  .btn.primary { border-color: rgba(10,132,255,.35); background: rgba(10,132,255,.08); color:#035; }
-  .status { margin-top: 10px; color: var(--muted); font-size: 14px; }
-  audio { width: 100%; margin-top: 8px; }
-  .hint { margin-top: 10px; color: var(--muted); font-size: 13px; }
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Segoe UI",sans-serif;
+background:linear-gradient(180deg,#f7fbff,#eef6ff);color:#0f172a;}
+.header{padding:18px 16px 10px;}
+.frame-title{border:2px solid #38bdf8;padding:14px 16px;border-radius:14px;background:#f8fcff;text-align:center;}
+.frame-title h1{margin:0;font-size:20px;}
+.frame-title p{margin:6px 0 0;font-size:14px;color:#475569;}
+.note{font-size:12px;color:#475569;margin:12px 16px;}
+.main{margin:0 16px 24px;padding:16px;background:#fff;border-radius:18px;box-shadow:0 8px 18px rgba(15,23,42,.08);}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+select{flex:1;max-width:100%;font-size:16px;padding:10px 36px 10px 12px;border-radius:12px;border:1px solid #cbd5f5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+button{font-size:15px;padding:10px 14px;border-radius:12px;border:1px solid #cbd5f5;background:#eff6ff;}
+button:active{transform:scale(.98);}
+.label{margin-top:14px;font-size:13px;color:#475569;}
+.jp{font-size:18px;font-weight:600;margin-top:6px;}
+.en{font-size:16px;margin-top:4px;}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+audio{width:100%;margin-top:10px;}
+.status{margin-top:8px;font-size:13px;color:#475569;}
+.hint{margin-top:10px;font-size:12px;color:#64748b;}
 </style>
 </head>
 <body>
-  <h1>造影剤（Contrast Dye） 音声ガイド</h1>
-  <p class="sub">※ できれば GitHub Pages（https://○○○.github.io/...）のURLで開いてください。<br>
-  iPhone/iPad では自動再生できないため、下の再生ボタンを押してください。</p>
+<div class="header">
+  <div class="frame-title">
+    <h1>造影剤の説明・チューブ接続（Contrast Dye & IV Tube）</h1>
+    <p>English Audio Guide</p>
+  </div>
+</div>
 
-  <div class="panel">
-    <div class="row" style="margin-bottom:10px;">
-      <span class="badge">ステップ選択</span>
-    </div>
+<p class="note">※ iPhone / iPad / Android で再生できます。最初は「再生」を押してください。</p>
 
-    <select id="stepSelect" aria-label="ステップ選択"></select>
-
-    <div class="row" style="margin-top:10px;">
-      <button class="navbtn" id="prevBtn">← 前</button>
-      <button class="navbtn" id="nextBtn">次 →</button>
-    </div>
-
-    <div class="sectionTitle">日本語（内容）</div>
-    <p class="jp" id="jpText"></p>
-
-    <div class="sectionTitle">English (Script)</div>
-    <p class="en" id="enText"></p>
-
-    <div class="row" style="margin-top:10px;">
-      <button class="btn primary" id="playBtn">▶ 再生 / Play</button>
-      <button class="btn" id="pauseBtn">⏸ 一時停止 / Pause</button>
-      <button class="btn" id="replayBtn">↻ もう一度 / Replay</button>
-    </div>
-
-    <div class="status" id="status">待機中 / Ready</div>
-
-    <audio id="player" controls preload="none"></audio>
-
-    <div class="hint">再生されない場合は、下のコントロール（▶）からも再生できます。</div>
+<div class="main">
+  <div class="row">
+    <select id="sel"></select>
+    <button id="prev">← 前</button>
+    <button id="next">次 →</button>
   </div>
 
+  <div class="label">日本語（内容）</div>
+  <div class="jp" id="jp"></div>
+
+  <div class="label">English (Script)</div>
+  <div class="en" id="en"></div>
+
+  <div class="controls">
+    <button id="play">▶︎ 再生</button>
+    <button id="pause">⏸ 一時停止</button>
+    <button id="replay">↻ もう一度</button>
+  </div>
+
+  <div class="status" id="status">待機中 / Ready</div>
+  <audio id="player" controls></audio>
+
+  <div class="hint">
+    再生できない場合：消音モード解除、音量、Bluetooth接続を確認してください。
+  </div>
+</div>
+
 <script>
-const steps = [
-  { no: 1, title: "01. 今から造影剤の説明をしますね。", jp: "今から造影剤の説明をしますね。", en: "I'll walk you through the contrast dye now.", audio: "audio/01.caf" },
-  { no: 2, title: "02. 造影剤で体が温かく感じることがあります。", jp: "造影剤が静脈に入ると、血管の圧の影響で体が熱く感じることがあります。", en: "When the contrast dye is injected into your vein, you might feel warm throughout your body because of the pressure in your blood vessels.", audio: "audio/02.caf" },
-  { no: 3, title: "03. すぐに治まるので心配いりません。", jp: "皆さん同じように感じます。すぐに治まるので心配しないでください。", en: "Everyone feels the same way, and it will go away soon, so please don't worry.", audio: "audio/03.caf" },
-  { no: 4, title: "04. 尿が漏れたように感じることがあります。", jp: "造影剤が入った後、尿が漏れたように感じることがありますが、感覚だけで実際には漏れていません。", en: "After the contrast dye is injected, you may feel as if you've wet yourself, but it's just a sensation. Nothing actually happened.", audio: "audio/04.caf" },
-  { no: 5, title: "05. 以前の副作用について確認します。", jp: "以前、造影剤で副作用が出たことはありますか？", en: "Have you ever had any side effects with contrast dye before?", audio: "audio/05.caf" },
-  { no: 6, title: "06. 注入チューブを交換します。", jp: "造影剤注入のチューブを交換しますね。", en: "We're going to change the tube for the contrast dye injection.", audio: "audio/06.caf" },
-  { no: 7, title: "07. アルコール消毒のアレルギー確認です。", jp: "アルコール消毒で皮膚がかぶれたり、アレルギーが出たことはありますか？", en: "Have you ever had any skin reactions or allergies to alcohol wipes?", audio: "audio/07.caf" },
-  { no: 8, title: "08. 交換時に少し痛いかもしれません。", jp: "交換する時、針が少し動くので少し痛いかもしれません。", en: "You might feel a little pain while we're changing it, because the needle might move slightly.", audio: "audio/08.caf" },
-  { no: 9, title: "09. ルート確認のフラッシュをします。", jp: "点滴ルート確認のために少し水（生理食塩水）を流します。痛かったら教えてください。", en: "I'll flush a little bit of water to check the IV line. Please tell us if it hurts.", audio: "audio/09.caf" }
+const STEPS = [
+ {preview:"造影剤の説明…", jp:"これから造影剤について説明します。", en:"I'll walk you through the contrast dye now."},
+ {preview:"温かく感じる…", jp:"造影剤を注射すると、血管の圧の影響で体が温かく感じることがあります。", en:"When the contrast dye is injected into your vein, you might feel warm sensation throughout your body due to the pressure in your blood vessels."},
+ {preview:"すぐ治まる…", jp:"みなさん同じように感じますが、すぐにおさまるので心配いりません。", en:"Everyone feels the same way, and it will go away soon, so please don’t worry."},
+ {preview:"濡れた感じ…", jp:"造影剤の後、尿漏れしたように感じることがありますが、感覚だけです。実際には何も起きていません。", en:"After the contrast dye is injected, you may feel as if you’ve wet yourself, but it’s just a sensation. Nothing actually happened."},
+ {preview:"副作用の経験…", jp:"以前、造影剤で副作用が出たことはありますか？", en:"Have you ever had any side effects with contrast dye before?"},
+ {preview:"チューブ交換…", jp:"造影剤を注入するためのチューブを交換しますね。", en:"We’re going to change the tube for the contrast dye injection."},
+ {preview:"消毒アレルギー…", jp:"アルコール綿（消毒）で皮膚のかぶれやアレルギーはありますか？", en:"Have you ever had any skin reactions or allergies to alcohol wipes?"},
+ {preview:"少し痛むかも…", jp:"交換している間、針が少し動くことがあるので、少し痛むかもしれません。", en:"You might feel a little pain while we’re changing it, because the needle might move slightly."},
+ {preview:"ルート確認…", jp:"点滴ルートの確認のため、少しお水を流します。痛ければ教えてください。", en:"I’ll flush a little bit of water to check the IV line. Please tell us if it hurts."}
 ];
 
-const sel = document.getElementById("stepSelect");
-const jpText = document.getElementById("jpText");
-const enText = document.getElementById("enText");
-const player = document.getElementById("player");
-const statusEl = document.getElementById("status");
+const sel=document.getElementById('sel'),
+jp=document.getElementById('jp'),
+en=document.getElementById('en'),
+player=document.getElementById('player'),
+status=document.getElementById('status');
 
-const playBtn = document.getElementById("playBtn");
-const pauseBtn = document.getElementById("pauseBtn");
-const replayBtn = document.getElementById("replayBtn");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
+STEPS.forEach((s,i)=>{
+ const o=document.createElement('option');
+ o.value=i;
+ o.textContent=`${String(i+1).padStart(2,'0')}｜${s.jp}`;
+ sel.appendChild(o);
+});
 
-let current = 0;
-
-function setStatus(msg){ statusEl.textContent = msg; }
-
-function stopAll(){
-  player.pause();
+let idx=0;
+function load(i){
+ idx=Math.max(0,Math.min(STEPS.length-1,i));
+ sel.value=idx;
+ jp.textContent=STEPS[idx].jp;
+ en.textContent=STEPS[idx].en;
+ player.src=`audio/step_${String(idx+1).padStart(2,'0')}.m4a`;
+ status.textContent="待機中 / Ready";
 }
-
-function loadStep(idx){
-  current = Math.max(0, Math.min(steps.length - 1, idx));
-  sel.value = String(current);
-  const s = steps[current];
-  jpText.textContent = s.jp;
-  enText.textContent = s.en;
-  stopAll();
-  player.src = s.audio;
-  player.currentTime = 0;
-  setStatus("待機中 / Ready");
-  prevBtn.disabled = (current === 0);
-  nextBtn.disabled = (current === steps.length - 1);
-}
-
-steps.forEach((s, i)=>{
-  const opt = document.createElement("option");
-  opt.value = String(i);
-  opt.textContent = s.title;
-  sel.appendChild(opt);
-});
-
-sel.addEventListener("change", (e)=> loadStep(parseInt(e.target.value,10)));
-
-prevBtn.addEventListener("click", ()=> loadStep(current - 1));
-nextBtn.addEventListener("click", ()=> loadStep(current + 1));
-
-playBtn.addEventListener("click", async ()=>{
-  try{
-    await player.play();
-    setStatus("再生中 / Playing");
-  }catch(e){
-    setStatus("再生できませんでした。画面下の▶から再生してください。");
-  }
-});
-pauseBtn.addEventListener("click", ()=>{
-  player.pause();
-  setStatus("一時停止 / Paused");
-});
-replayBtn.addEventListener("click", async ()=>{
-  try{
-    player.currentTime = 0;
-    await player.play();
-    setStatus("再生中 / Playing");
-  }catch(e){
-    setStatus("再生できませんでした。画面下の▶から再生してください。");
-  }
-});
-
-player.addEventListener("ended", ()=> setStatus("完了 / Done"));
-player.addEventListener("pause", ()=>{
-  if(player.currentTime > 0 && player.currentTime < player.duration) setStatus("一時停止 / Paused");
-});
-player.addEventListener("play", ()=> setStatus("再生中 / Playing"));
-
-loadStep(0);
+sel.onchange=()=>load(parseInt(sel.value));
+document.getElementById('prev').onclick=()=>load(idx-1);
+document.getElementById('next').onclick=()=>load(idx+1);
+document.getElementById('play').onclick=()=>player.play();
+document.getElementById('pause').onclick=()=>player.pause();
+document.getElementById('replay').onclick=()=>{player.currentTime=0;player.play();}
+player.onplay=()=>status.textContent="再生中 / Playing";
+player.onpause=()=>status.textContent="一時停止 / Paused";
+player.onended=()=>status.textContent="待機中 / Ready";
+load(0);
 </script>
 </body>
 </html>
